@@ -1,0 +1,27 @@
+	<!-- name is a local var that get its valus from edit and new views -->
+	<h1><%= nombre  %> articulo</h1>
+	<%= form_for(@article) do |f| %>
+
+	<!-- Muestra los errores if article no se crea -->
+	<% @article.errors.full_messages.each do |message| %>
+	<div class="be-red white top-space">
+		*<%=message%>
+	</div>
+	<% end %>
+	
+
+	<div class="field">
+		<%= f.text_field :title, placeholder: "Titulo", 
+		class:"form-control"%>
+	</div>
+
+	<div class="field">
+		<%= f.text_area :body, placeholder: "Escribe el articulo", style:
+		"height:250px;", class:"form-control" %>
+	</div>
+	<div class="field">
+		<%= f.submit "Guardar", class:"btn be-red white large-padding" %>
+	</div>
+<% end %>
+
+</div>

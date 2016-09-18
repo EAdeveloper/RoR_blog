@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rails4GratisBlog</title>
+    <%= csrf_meta_tags %>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  
+    <!-- El partial de la NAV se ecuentra aqui -->
+    <%= render "partials/navigation" %>
+
+
+    <%= yield %>
+    
+<!-- flash message -->
+  <p class="notice"><%= notice%></p>
+  <p class="alert"><%= alert %></p>
+
+
+  </body>
+</html>

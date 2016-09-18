@@ -1,0 +1,35 @@
+
+<header>
+  	<nav class="be-red white large_padding">
+  	<ul class="no-list row center-xs middle-xs">
+  	<li class="col-sm">
+  		<h1 class="no-margin" id="logo">Blog EDA</h1>
+  	</li>
+  		<li class="col-sm">
+  		<%= link_to "Inicio", root_path %>
+  		</li>
+  		<li class="col-sm">
+  		Design
+  		</li>
+  		<li class="col-sm">
+  		Technology
+  		</li>
+  		<li class="col-sm">
+  		Programming
+  		</li class="col-sm">
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to "Cerrar session", destroy_user_session_path, 
+        method: :delete %>
+      </li>
+      <%else%>
+       <li class="col-sm">
+        <%= link_to "Iniciar session", new_user_session_path %>
+      </li>
+       <li class="col-sm">
+        <%= link_to "Crear cuenta", new_user_registration_path %>
+      </li>
+      <%end%>
+  	</ul>
+  	</nav>
+  </header>
