@@ -31,12 +31,16 @@ class ArticlesController < ApplicationController
 	end	
 	#POST /articles
 	def create
+		#INSERT INTO
 		# @article = Article.new(title: params[:article][:title],
 		# 					 body: params[:article][:body])
 
 		#Este article_params viene del Private article_params
 		#declarados abajo
-		@article = Article.new(article_params)
+		# @article = Article.new(article_params)
+
+		# REf the user that create the article
+		@article = current_user.articles.new(article_params)
 
 		#El mismo de arriva diference is que  lo salva de una ves con Create
 		# @article = Article.create(title: params[:article][:title],

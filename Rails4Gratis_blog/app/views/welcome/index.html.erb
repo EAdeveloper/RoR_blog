@@ -1,7 +1,9 @@
 
 <h1>Welcome to my Blog </h1>
 
-
+<%if user_signed_in? %>
+<h1><%= current_user.email %></h1>
+<% end %>
 
 <p>Find me in app/views/welcome/index.html.erb</p>
 <h1><%= link_to "Recurso con post" ,"/welcome/index", method: :post %></h1>

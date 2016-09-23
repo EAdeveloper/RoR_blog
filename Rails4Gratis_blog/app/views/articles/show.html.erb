@@ -1,4 +1,13 @@
 <h1><%= @article.title %> </h1>
+
+<!-- Unless is the same as 'if not' -->
+<%unless @article.user.nil? %>
+<p>
+	Escrito por: <%= @article.user.email %>
+</p>
+<% end %>
+
+
 <div>
 	<%=@article.body %>
 </div>

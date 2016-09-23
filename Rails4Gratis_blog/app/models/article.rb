@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+	belongs_to :user
 	#Valida que los camppos no esten Vacios
 	#Uniqueness hace que el title no se repita, lo gace unico
 	validates :title, presence: true, uniqueness: true
