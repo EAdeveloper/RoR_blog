@@ -1,6 +1,16 @@
 class ArticlesController < ApplicationController
 #! For any actions in this controller, 
 #tinenes que crear un template en Views
+	#te redirigen to sign in si no logged
+	#Callbacks
+	#after_action
+	# before_action :validate_user, except: [:show,:index]
+	#Method helper from devise
+	# before_action :authenticate_user!
+	# before_action :authenticate_user!, only: [:create, :new]
+	before_action :authenticate_user!, except: [:show, :index]
+
+	before_action :set_article, except: [:index, :new, :create]
 
 	#GET /articles
 	def index
@@ -12,8 +22,11 @@ class ArticlesController < ApplicationController
 
 	#Get /articles/:id
 	def show
+		@article.update_visits_count
 		#Va a encontrar all de Articles por ID
-		@article = Article.find(params[:id])
+
+		# @article = Article.find(params[:id])
+
 		#Esta consulata hace lo mismo k el de arriva
 		#@Article.where(" id = ? ", params[:id])
 
@@ -40,21 +53,36 @@ class ArticlesController < ApplicationController
 		# @article = Article.new(article_params)
 
 		# REf the user that create the article
-		@article = current_user.articles.new(article_params)
+	
+			@article = current_user.articles.new(article_params)
 
 		#El mismo de arriva diference is que  lo salva de una ves con Create
 		# @article = Article.create(title: params[:article][:title],
 		# 					 body: params[:article][:body])
-
-		if @article.save
-		redirect_to @article
-		else	
-			render :new
-		end
+			if @article.save
+			redirect_to @article
+			else	
+				render :new
+			end
 	end	#create
 
+	#working to not allow create art if not logged
+	# if user_signed_in?
+	# 		@article = current_user.articles.new(article_params)
+	# 		if @article.save
+	# 		redirect_to @article
+	# 		else	
+	# 			render :new
+	# 		end
+	# 	end#user_signed_in?
+	# end	#create
+
+
+	#DELETE /article/:id
 	def destroy
-		@article = Article.find(params[:id])
+		#DELETE FROM articles
+		# @article = Article.find(params[:id])
+
 		#Elimina el ojb from the DB
 		@article.destroy
 		redirect_to articles_path
@@ -63,7 +91,7 @@ class ArticlesController < ApplicationController
 		#PUT /articles/:id
 	def update
 		# @article.update_attributes({title: 'Nuevo titulo'})
-		@article = Article.find(params[:id])
+		#@article = Article.find(params[:id])
 			if @article.update(article_params)
 				redirect_to @article
 			else
@@ -73,13 +101,22 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@article = Article.find(params[:id])
+		# @article = Article.find(params[:id])
 	end
 
 
 	#AVOID SQL injections  solo permitir title y body para los campos
 	#y usarlo en metodo 'create' arriva como new '(article_params)'
 	private
+
+	def set_article
+		@article = Article.find(params[:id])
+	end	
+
+	def validate_user
+		redirect_to new_user_session_path, notice: "Necesitas iniciar sesión"
+	end
+
 	def article_params
 		params.require(:article).permit(:title,:body)
 	end
