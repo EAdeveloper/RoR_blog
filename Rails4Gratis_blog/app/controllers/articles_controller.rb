@@ -23,6 +23,7 @@ class ArticlesController < ApplicationController
 	#Get /articles/:id
 	def show
 		@article.update_visits_count
+		@comment = Comment.new
 		#Va a encontrar all de Articles por ID
 
 		# @article = Article.find(params[:id])
