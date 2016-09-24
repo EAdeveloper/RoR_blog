@@ -14,9 +14,9 @@ class CommentsController < ApplicationController
 
   # # GET /comments/1
   # # GET /comments/1.json
-  # def show
+  def show
 
-  # end
+  end
 
   # # GET /comments/new
   # def new
