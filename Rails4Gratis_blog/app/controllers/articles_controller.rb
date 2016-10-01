@@ -42,6 +42,7 @@ class ArticlesController < ApplicationController
 	#GET/articles/new
 	def new
 		@article = Article.new
+		@category = Category.all
 	end	
 	#POST /articles
 	def create
@@ -54,12 +55,16 @@ class ArticlesController < ApplicationController
 		# @article = Article.new(article_params)
 
 		# REf the user that create the article
-			 @article = current_user.articles.create(article_params)
-			# @article = current_user.articles.new(article_params)
+			 # @article = current_user.articles.create(article_params)
+			@article = current_user.articles.new(article_params)
+			#raise params.to_yaml
+			@article.categories = params[:categories]
 
 		#El mismo de arriva diference is que  lo salva de una ves con Create
 		# @article = Article.create(title: params[:article][:title],
 		# 					 body: params[:article][:body])
+
+
 			if @article.save
 			redirect_to @article
 			else	
@@ -119,7 +124,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def article_params
-		params.require(:article).permit(:title,:body,:cover)
+		params.require(:article).permit(:title,:body,:cover,:categories)
 	end
 
 

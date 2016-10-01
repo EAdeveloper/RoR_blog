@@ -24,6 +24,16 @@
 		"height:250px;", class:"form-control" %>
 	</div>
 	<div class="field">
+		<label>Categorias</label>
+
+		<% @categories.each do |cate|%>
+		<div class="field">
+		<%= check_box_tag "categories[]", cate.id %><%=cate.name %>
+		</div>
+		<% end %>
+	</div>
+
+	<div class="field">
 		<%= f.submit "Guardar", class:"btn be-red white large-padding" %>
 	</div>
 	</div>
