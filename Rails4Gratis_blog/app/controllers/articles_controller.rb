@@ -54,8 +54,8 @@ class ArticlesController < ApplicationController
 		# @article = Article.new(article_params)
 
 		# REf the user that create the article
-	
-			@article = current_user.articles.new(article_params)
+			 @article = current_user.articles.create(article_params)
+			# @article = current_user.articles.new(article_params)
 
 		#El mismo de arriva diference is que  lo salva de una ves con Create
 		# @article = Article.create(title: params[:article][:title],
@@ -119,7 +119,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def article_params
-		params.require(:article).permit(:title,:body)
+		params.require(:article).permit(:title,:body,:cover)
 	end
 
 

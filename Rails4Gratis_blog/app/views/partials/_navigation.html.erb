@@ -3,20 +3,18 @@
   	<nav class="be-red white large_padding">
   	<ul class="no-list row center-xs middle-xs">
   	<li class="col-sm">
-  		<h1 class="no-margin" id="logo">Blog EDA</h1>
+  		<h1 class="no-margin" id="logo"><%= link_to "EDA's blog", root_path %></h1>
   	</li>
   		<li class="col-sm">
-  		<%= link_to "Inicio", root_path %>
+  		<%= link_to "Articles", articles_path %>
   		</li>
-  		<li class="col-sm">
-  		Design
-  		</li>
-  		<li class="col-sm">
-  		Technology
-  		</li>
-  		<li class="col-sm">
-  		Programming
-  		</li class="col-sm">
+  	   <% @categories.each do |cate| %>
+       <li class="col-sm">
+         <%=link_to cate.name, cate %>
+       </li>
+      <% end %>
+
+
       <% if user_signed_in? %>
       <li>
         <%= link_to "Cerrar session", destroy_user_session_path, 

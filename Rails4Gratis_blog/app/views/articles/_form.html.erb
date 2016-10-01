@@ -1,6 +1,6 @@
 	<!-- name is a local var that get its valus from edit and new views -->
 	<h1><%= nombre  %> articulo</h1>
-	<%= form_for(@article) do |f| %>
+	<%= form_for @article, url: articles_path, html: { multipart: true } do |f| %>
 
 	<!-- Muestra los errores if article no se crea -->
 	<% @article.errors.full_messages.each do |message| %>
@@ -14,6 +14,10 @@
 		<%= f.text_field :title, placeholder: "Titulo", 
 		class:"form-control"%>
 	</div>
+	
+	<div class="field">
+		   <%= f.file_field :cover %>
+	</div>
 
 	<div class="field">
 		<%= f.text_area :body, placeholder: "Escribe el articulo", style:
@@ -22,6 +26,7 @@
 	<div class="field">
 		<%= f.submit "Guardar", class:"btn be-red white large-padding" %>
 	</div>
+	</div>
 <% end %>
 
-</div>
+

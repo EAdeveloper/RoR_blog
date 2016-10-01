@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :categories
   #Nested resources
   resources :articles do
   	resources :comments, only: [:create, :destroy, :update]

@@ -5,10 +5,18 @@
 <p>
 	Escrito por: <%= @article.user.email %>
 </p>
+
+
+<div class="field">
+
+	<%= image_tag @article.cover.url(:medium) %>
+</div>
+
 <p>
 	Visitas: <%= @article.visits_count %>
 </p>
 <% end %>
+
 
 
 <div>
