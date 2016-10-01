@@ -1,7 +1,8 @@
 class Article < ApplicationRecord
 	belongs_to :user
 	has_many :comments
-
+	has_many :has_categories
+	has_many :categories, through: :has_categories
 	# attr_reader :categories
 
 	#Valida que los camppos no esten Vacios
@@ -41,6 +42,7 @@ class Article < ApplicationRecord
 				article_id: self.id)
 		end
 	end
+
 
 	def set_visits_count
 		# self.visits_count || = 0
