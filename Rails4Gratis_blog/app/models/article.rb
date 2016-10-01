@@ -26,6 +26,16 @@ class Article < ApplicationRecord
 	 has_attached_file :cover, styles: { medium: "300x300>", thumb: "100x100>" }
   	 validates_attachment_content_type :cover, content_type: /\Aimage\/.*\z/
 
+  	 # Metodos de classes
+	# def self.publicados
+	# 	Article.where(state:"published")
+	# end		
+  	#Este Scope hace lo mismo que el mwtodo de clase declarado above
+	scope :publicados, ->{ where(state:"published")}
+	scope :ultimos, ->{order("created_at DESC").limit(10) }
+	scope :primeros, ->{order("created_at DESC").limit(10) }
+	
+
 	#Custom setter; me permite asignar valor al atribute de un obj
 	def categories=(value)
 		@categories = value

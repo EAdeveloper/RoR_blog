@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index'
 
+  
+  get "/dashboard", to: "welcome#dashboard"
+  # To modify the resources that alredy exists
+   # need use method PUT
+  put "/articles/:id/publish", to: "articles#publish"
+
+
 end
   
   # devise_for :users

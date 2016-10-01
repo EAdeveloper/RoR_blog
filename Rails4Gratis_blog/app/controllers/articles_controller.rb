@@ -9,17 +9,20 @@ class ArticlesController < ApplicationController
 	# before_action :authenticate_user!
 	# before_action :authenticate_user!, only: [:create, :new]
 	before_action :authenticate_user!, except: [:show, :index]
-
 	before_action :set_article, except: [:index, :new, :create]
-
 	before_action :authenticate_editor?, only: [:new,:create,:update]
-	before_action :authenticate_admin?, only: [:destroy]
+	before_action :authenticate_admin?, only: [:destroy,:publish]
 
 	#GET /articles
 	def index
 		#traer todos los registro del modelo articles a la varible luego 
 		#sera instaciada en el view index
-		@articles = Article.all
+		# @articles = Article.all
+		#FROM state machimes GEM
+		# @articles = Article.where(state: "published")
+		# @articles = Article.published
+		#Metodos que puedo utilizar from my scope in article Model
+		@articles = Article.publicados.ultimos
 	end
 
 
@@ -112,7 +115,11 @@ class ArticlesController < ApplicationController
 	def edit
 		# @article = Article.find(params[:id])
 	end
-
+	# Articles Pulicados from Admin
+	def publish
+		@article.publish!
+		redirect_to @article
+	end		
 
 	#AVOID SQL injections  solo permitir title y body para los campos
 	#y usarlo en metodo 'create' arriva como new '(article_params)'
