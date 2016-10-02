@@ -10,7 +10,7 @@ articulo' -->
 <h1><%= link_to article.title, article %> </h1>
 <div>					
 						<!-- Link para eliminar el art From destoy en el model -->
-	<%=article.body %> <!-- - <%= link_to "Eliminar", article, method: :delete, class:"red" %> -->
+	<%=article.body.html_safe %> <!-- - <%= link_to "Eliminar", article, method: :delete, class:"red" %> -->
 </div>
 <% end %>
 
