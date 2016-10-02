@@ -32,8 +32,8 @@ class Article < ApplicationRecord
 	# end		
   	#Este Scope hace lo mismo que el mwtodo de clase declarado above
 	scope :publicados, ->{ where(state:"published")}
-	scope :ultimos, ->{order("created_at DESC").limit(10) }
-	scope :primeros, ->{order("created_at DESC").limit(10) }
+	scope :ultimos, ->{order("created_at DESC") }
+	# scope :primeros, ->{order("created_at DESC").limit(10) }
 	
 
 	#Custom setter; me permite asignar valor al atribute de un obj

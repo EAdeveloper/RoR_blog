@@ -22,7 +22,10 @@ class ArticlesController < ApplicationController
 		# @articles = Article.where(state: "published")
 		# @articles = Article.published
 		#Metodos que puedo utilizar from my scope in article Model
-		@articles = Article.publicados.ultimos
+		# @articles = Article.publicados.ultimos
+		#Pagination wiht will_paginate gem
+		@articles = Article.paginate(page: params[:page],per_page:5).publicados.ultimos
+		# Article.paginate(params[:page])
 	end
 
 
